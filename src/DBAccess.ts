@@ -175,14 +175,17 @@ export default class DBAccess {
         bindings?: any[]
     ): Promise<DBAccessQueryResult> {
         return new Promise<DBAccessQueryResult>((resolve, reject) => {
+            console.log(`_queryMySQL 1 ${new Date()}`); // ///////// TODO: remove asap. /////////////////
             if (Array.isArray(bindings)) {
                 sql = (<PoolConnection>client).format(sql, bindings);
             }
-
+            console.log(`_queryMySQL 2 ${new Date()}`); // ///////// TODO: remove asap. /////////////////
             (<PoolConnection>client).query(sql, async (error: MysqlError | null, data: any) => {
+                console.log(`_queryMySQL 3 ${new Date()}`); // ///////// TODO: remove asap. /////////////////
                 await this._releaseDbClientIfNecessary((<PoolConnection>client), shouldReturnClient);
-
+                console.log(`_queryMySQL 4 ${new Date()}`); // ///////// TODO: remove asap. /////////////////
                 if (error) {
+                    console.log(`_queryMySQL 5 ${new Date()}`); // ///////// TODO: remove asap. /////////////////
                     await generateError(this._conversion, `\t--[${ caller }] ${ error }`, sql);
                     return processExitOnError ? process.exit() : reject({ client: client, data: undefined, error: error });
                 }

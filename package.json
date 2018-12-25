@@ -12,6 +12,7 @@
         "node": ">=8.0.0"
     },
     "dependencies": {
+        "json2csv": "^4.3.2",
         "mysql": "^2.16.0",
         "pg": "^7.5.0",
         "pg-copy-streams": "^1.2.0"
